@@ -1,0 +1,56 @@
+/* styles.css */
+/* styles.css */
+.custom-tabs .ant-tabs-nav::before {
+    position: absolute;
+    right: 0;
+    left: 0;
+    border-bottom: 3px solid #f0f0f0;
+    content: '';
+  }
+
+/* styles.css */
+.ant-card .ant-card-body {
+  padding: 5px !important; /* Mengatur padding menjadi 5px */
+}
+
+/* Jika Anda ingin mengatur jarak antar card, tambahkan aturan berikut */
+.ant-card {
+  margin-bottom: 16px; /* Jarak bawah antar card */
+}
+  
+
+  .ant-tabs-card.ant-tabs-top > .ant-tabs-nav .ant-tabs-tab {
+  border-radius: 0;
+}
+
+.site-tree-search-value {
+    color: #f50;
+  }
+
+  .ant-tabs .ant-tabs-nav .ant-tabs-tab-active {
+    border-top: 3px solid #1890ff; /* Ganti dengan warna yang diinginkan */
+  }
+
+  
+  :where(.css-dev-only-do-not-override-d2lrxs).ant-tabs-top > .ant-tabs-nav,
+  :where(.css-dev-only-do-not-override-d2lrxs).ant-tabs-bottom > .ant-tabs-nav,
+  :where(.css-dev-only-do-not-override-d2lrxs).ant-tabs-top > div > .ant-tabs-nav,
+  :where(.css-dev-only-do-not-override-d2lrxs).ant-tabs-bottom > div > .ant-tabs-nav {
+      margin: 0 0 0 0; /* Mengatur margin-bottom menjadi 0 */
+  }
+
+  .ant-table-wrapper .ant-table-cell,
+.ant-table-wrapper .ant-table-thead > tr > th,
+.ant-table-wrapper .ant-table-tbody > tr > th,
+.ant-table-wrapper .ant-table-tbody > tr > td,
+.ant-table-wrapper tfoot > tr > th,
+.ant-table-wrapper tfoot > tr > td {
+    position: relative;
+    padding: 4px 8px;
+    overflow-wrap: break-word;
+}
+
+  
+  
+
+  
