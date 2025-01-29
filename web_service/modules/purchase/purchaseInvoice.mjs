@@ -1,4 +1,3 @@
-// plugins/sales.mjs
 export default async function purchaseInvoicePlugin(fastify, options) {
     // Route for sales invoices
     fastify.get('/api/purchase/invoice', async (request, reply) => {
@@ -8,10 +7,30 @@ export default async function purchaseInvoicePlugin(fastify, options) {
             const today = new Date();
             const currentYear = today.getFullYear();
             const currentMonth = String(today.getMonth() + 1).padStart(2, '0'); // Bulan dalam format 'MM'
-  
-            const startDate = startMonth ? `${startMonth}-01` : `${currentYear}-${currentMonth}-01`; // Default start date
-            const endDate = endMonth ? `${endMonth}-31` : `${currentYear}-${currentMonth}-31`; // Default end date
-  
+
+            // Memisahkan tahun dan bulan
+            const startMonthParts = startMonth.split('-');
+            const endMonthParts = endMonth.split('-');
+            const startYear = startMonthParts[0];
+            const startMonthNumber = parseInt(startMonthParts[1], 10); // Bulan dari startMonth (1-12)
+            const endYear = endMonthParts[0];
+            const endMonthNumber = parseInt(endMonthParts[1], 10); // Bulan dari endMonth (1-12)
+
+            // Validasi bulan dan tahun
+            if (isNaN(startMonthNumber) || startMonthNumber < 1 || startMonthNumber > 12) {
+                return reply.status(400).send({ error: 'Invalid start month' });
+            }
+            if (isNaN(endMonthNumber) || endMonthNumber < 1 || endMonthNumber > 12) {
+                return reply.status(400).send({ error: 'Invalid end month' });
+            }
+
+            // Menentukan tanggal mulai dan akhir
+            const startDate = `${startYear}-${String(startMonthNumber).padStart(2, '0')}-01`; // Default start date
+
+            // Menghitung jumlah hari di bulan akhir
+            const lastDayOfMonth = new Date(endYear, endMonthNumber, 0).getDate(); // Mendapatkan jumlah hari di bulan tersebut
+            const endDate = `${endYear}-${String(endMonthNumber).padStart(2, '0')}-${String(lastDayOfMonth).padStart(2, '0')}`; // Default end date
+
             const { rows: sales_invoice } = await dbClient.query(`
                 SELECT 
                     i.C_Invoice_ID AS id,
@@ -37,5 +56,4 @@ export default async function purchaseInvoicePlugin(fastify, options) {
             dbClient.release(); // Selalu release client
         }
     });
-  }
-  
+}

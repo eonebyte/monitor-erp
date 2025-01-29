@@ -22,7 +22,7 @@ async function VendorDueDate(fastify, opts) {
                 TO_CHAR(i.datereceived, 'DD-MM-YYYY') AS datereceived,
                 i.c_paymentterm_id, 
                 pt.Name AS paymenttermname,
-                TO_CHAR(PaymentTermDueDate(i.c_paymentterm_id, i.datereceived), 'DD-MM-YYYY') AS duedate
+                TO_CHAR(PaymentTermDueDate(i.c_paymentterm_id, i.dateinvoiced), 'DD-MM-YYYY') AS duedate
             FROM 
                 c_invoice i
             JOIN c_paymentterm pt 
